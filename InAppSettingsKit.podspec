@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
 	s.version		= '2.1.1'
 	s.summary		= 'This iPhone framework allows settings to be in-app in addition to being in the Settings app.'
 	s.homepage		= 'https://github.com/futuretap/InAppSettingsKit'
-	s.author		= { "Luc Vandal": "http://www.futuretap.com/contact/", "Ortwin Gentz": "http://edovia.com/company/#contact_form" }
+	s.author		= { "Luc Vandal" => "http://www.futuretap.com/contact/", "Ortwin Gentz" => "http://edovia.com/company/#contact_form" }
 	s.license 		= 'BSD'
 	s.platform		= :ios, '5.0'
 	s.requires_arc	= true
