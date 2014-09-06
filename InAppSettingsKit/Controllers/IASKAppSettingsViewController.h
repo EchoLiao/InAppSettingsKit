@@ -39,6 +39,7 @@
 #pragma mark - UITableView cell customization
 - (CGFloat)tableView:(UITableView*)tableView heightForSpecifier:(IASKSpecifier*)specifier;
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForSpecifier:(IASKSpecifier*)specifier;
+- (void)tableView:(UITableView*)tableView configureCell:(UITableViewCell*)cell indexPath:(NSIndexPath *)indexPath;
 
 #pragma mark - mail composing customization
 - (NSString*) settingsViewController:(id<IASKViewController>)settingsViewController

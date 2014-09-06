@@ -590,6 +590,9 @@ CGRect IASKCGRectSwap(CGRect rect);
 	cell.detailTextLabel.textAlignment = specifier.textAlignment;
 	cell.textLabel.adjustsFontSizeToFitWidth = specifier.adjustsFontSizeToFitWidth;
 	cell.detailTextLabel.adjustsFontSizeToFitWidth = specifier.adjustsFontSizeToFitWidth;
+    if ([self.delegate respondsToSelector:@selector(tableView:configureCell:indexPath:)]) {
+        [self.delegate tableView:tableView configureCell:cell indexPath:indexPath];
+    }
     return cell;
 }
 
