@@ -21,6 +21,10 @@
 #import "IASKViewController.h"
 #import "IASKSpecifier.h"
 
+#define IASKSpecifierValuesViewCellTextLabelFontKey      @"IASKSpecifierValuesViewCellTextLabelFontKey"
+#define IASKSpecifierValuesViewCellTextLabelTextColorKey @"IASKSpecifierValuesViewCellTextLabelTextColorKey"
+
+
 @class IASKSettingsReader;
 @class IASKAppSettingsViewController;
 
@@ -40,6 +44,9 @@
 - (CGFloat)tableView:(UITableView*)tableView heightForSpecifier:(IASKSpecifier*)specifier;
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForSpecifier:(IASKSpecifier*)specifier;
 - (void)tableView:(UITableView*)tableView configureCell:(UITableViewCell*)cell indexPath:(NSIndexPath *)indexPath;
+
+#pragma mark - Specifier Values UITableView cell customization
+- (NSDictionary *)customCellConfiguresForSpecifierValuesView;
 
 #pragma mark - mail composing customization
 - (NSString*) settingsViewController:(id<IASKViewController>)settingsViewController

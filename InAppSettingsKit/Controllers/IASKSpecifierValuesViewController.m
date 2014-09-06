@@ -14,6 +14,7 @@
 //  This code is licensed under the BSD license that is available at: http://www.opensource.org/licenses/bsd-license.php
 //
 
+#import "IASKAppSettingsViewController.h"
 #import "IASKSpecifierValuesViewController.h"
 #import "IASKSpecifier.h"
 #import "IASKSettingsReader.h"
@@ -152,6 +153,10 @@
 	
 	@try {
 		[[cell textLabel] setText:[self.settingsReader titleForStringId:[titles objectAtIndex:indexPath.row]]];
+        if (self.customInfos[IASKSpecifierValuesViewCellTextLabelFontKey])
+            cell.textLabel.font = self.customInfos[IASKSpecifierValuesViewCellTextLabelFontKey];
+        if (self.customInfos[IASKSpecifierValuesViewCellTextLabelTextColorKey])
+            cell.textLabel.textColor = self.customInfos[IASKSpecifierValuesViewCellTextLabelTextColorKey];
 	}
 	@catch (NSException * e) {}
     return cell;

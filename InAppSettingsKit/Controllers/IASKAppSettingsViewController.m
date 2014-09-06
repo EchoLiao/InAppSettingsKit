@@ -50,6 +50,7 @@ CGRect IASKCGRectSwap(CGRect rect);
 }
 
 @property (nonatomic, strong) id currentFirstResponder;
+@property (nonatomic, strong) NSDictionary *specifierValuesViewCellCustomInfo;
 
 - (void)_textChanged:(id)sender;
 - (void)synchronizeSettings;
@@ -141,6 +142,9 @@ CGRect IASKCGRectSwap(CGRect rect);
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapToEndEdit:)];   
     tapGesture.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:tapGesture];
+    if ([self.delegate respondsToSelector:@selector(customCellConfiguresForSpecifierValuesView)]) {
+        self.specifierValuesViewCellCustomInfo = [self.delegate customCellConfiguresForSpecifierValuesView];
+    }
 }
 
 - (void)viewDidUnload {
@@ -623,6 +627,7 @@ CGRect IASKCGRectSwap(CGRect rect);
         [targetViewController setCurrentSpecifier:specifier];
         targetViewController.settingsReader = self.settingsReader;
         targetViewController.settingsStore = self.settingsStore;
+        targetViewController.customInfos = self.specifierValuesViewCellCustomInfo;
 		targetViewController.view.tintColor = self.view.tintColor;
         _currentChildViewController = targetViewController;
         [[self navigationController] pushViewController:targetViewController animated:YES];

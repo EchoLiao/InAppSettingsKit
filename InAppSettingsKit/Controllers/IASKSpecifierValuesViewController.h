@@ -32,5 +32,6 @@
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSIndexPath *checkedItem;
 @property (nonatomic, retain) IASKSpecifier *currentSpecifier;
+@property (nonatomic, retain) NSDictionary *customInfos;
 
 @end
