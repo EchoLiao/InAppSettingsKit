@@ -142,9 +142,6 @@ CGRect IASKCGRectSwap(CGRect rect);
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapToEndEdit:)];   
     tapGesture.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:tapGesture];
-    if ([self.delegate respondsToSelector:@selector(customCellConfiguresForSpecifierValuesView)]) {
-        self.specifierValuesViewCellCustomInfo = [self.delegate customCellConfiguresForSpecifierValuesView];
-    }
 }
 
 - (void)viewDidUnload {
@@ -192,6 +189,10 @@ CGRect IASKCGRectSwap(CGRect rect);
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+
+    if ([self.delegate respondsToSelector:@selector(customCellConfiguresForSpecifierValuesView)]) {
+        self.specifierValuesViewCellCustomInfo = [self.delegate customCellConfiguresForSpecifierValuesView];
+    }
 
 	NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
 	[dc addObserver:self selector:@selector(synchronizeSettings) name:UIApplicationDidEnterBackgroundNotification object:[UIApplication sharedApplication]];
