@@ -247,6 +247,10 @@
     
     NSString *path = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    if ([fileManager fileExistsAtPath:file]) {
+        return file;
+    }
     
     for (NSString *settingsBundleName in settingsBundleNames) {
         for (NSString *extension in extensions) {
