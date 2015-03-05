@@ -469,7 +469,7 @@ CGRect IASKCGRectSwap(CGRect rect);
 	} else if ([identifier isEqualToString:kIASKPSChildPaneSpecifier]) {
 		cell = [[IASKPSTitleValueSpecifierViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	} else if ([identifier isEqualToString:kIASKMailComposeSpecifier] || [identifier isEqualToString:kIASKOpenURLSpecifier]) {
+	} else if ([identifier isEqualToString:kIASKMailComposeSpecifier] || [identifier isEqualToString:kIASKOpenURLSpecifier] || [identifier isEqualToString:kIASKButtonSpecifier]) {
 		cell = [[IASKPSTitleValueSpecifierViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
 		[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 	} else {
