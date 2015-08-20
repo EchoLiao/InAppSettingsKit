@@ -486,7 +486,7 @@ CGRect IASKCGRectSwap(CGRect rect);
 	IASKSpecifier *specifier  = [self.settingsReader specifierForIndexPath:indexPath];
 	if ([specifier.type isEqualToString:kIASKCustomViewSpecifier] && [self.delegate respondsToSelector:@selector(tableView:cellForSpecifier:)]) {
 		UITableViewCell* cell = [self.delegate tableView:tableView cellForSpecifier:specifier];
-		assert(nil != cell && "delegate must return a UITableViewCell for custom cell types");
+        NSAssert(cell, @"delegate must return a UITableViewCell for custom cell types");
 		return cell;
 	}
 	
@@ -620,8 +620,8 @@ CGRect IASKCGRectSwap(CGRect rect);
     IASKSpecifier *specifier  = [self.settingsReader specifierForIndexPath:indexPath];
     
     //switches and sliders can't be selected (should be captured by tableView:willSelectRowAtIndexPath: delegate method)
-    assert(![[specifier type] isEqualToString:kIASKPSToggleSwitchSpecifier]);
-    assert(![[specifier type] isEqualToString:kIASKPSSliderSpecifier]);
+    NSAssert(![[specifier type] isEqualToString:kIASKPSToggleSwitchSpecifier], nil);
+    NSAssert(![[specifier type] isEqualToString:kIASKPSSliderSpecifier], nil);
     
     if ([[specifier type] isEqualToString:kIASKPSMultiValueSpecifier]) {
         IASKSpecifierValuesViewController *targetViewController = [[IASKSpecifierValuesViewController alloc] init];
