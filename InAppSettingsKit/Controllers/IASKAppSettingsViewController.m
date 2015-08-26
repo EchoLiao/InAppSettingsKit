@@ -309,6 +309,38 @@ CGRect IASKCGRectSwap(CGRect rect);
     }
 }
 
++ (void)setupDefaultValues {
+    [self setupDefaultValuesForSettingsName:@"Settings"];
+}
+
++ (void)setupDefaultValuesForSettingsName:(NSString *)name {
+    NSString *file = [NSString stringWithFormat:@"%@/%@.bundle/Root.plist", [[NSBundle mainBundle] bundlePath], name];
+    [self setupDefaultValuesForSettingsFile:file];
+}
+
++ (void)setupDefaultValuesForSettingsFile:(NSString *)file {
+    NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:file];
+    NSArray *prefers = settings[@"PreferenceSpecifiers"];
+    if (prefers && [prefers isKindOfClass:[NSArray class]]) {
+        NSMutableDictionary *dict = [NSMutableDictionary new];
+        for (NSDictionary *item in prefers) {
+            NSString *key = item[@"Key"];
+            NSString *val = item[@"DefaultValue"];
+            if (key && val) {
+                dict[key] = val;
+            }
+        }
+        [[NSUserDefaults standardUserDefaults] registerDefaults:dict];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
++ (void)updateDefaultValue:(id)value forKey:(NSString *)key {
+    if (value && key) {
+        [[NSUserDefaults standardUserDefaults] registerDefaults:@{key : value}];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

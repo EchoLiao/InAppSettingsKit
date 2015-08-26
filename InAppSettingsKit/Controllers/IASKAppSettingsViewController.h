@@ -79,4 +79,8 @@
 - (void)synchronizeSettings;
 - (void)dismiss:(id)sender;
 - (void)setHiddenKeys:(NSSet*)hiddenKeys animated:(BOOL)animated;
++ (void)setupDefaultValues;
++ (void)setupDefaultValuesForSettingsName:(NSString *)name;
++ (void)setupDefaultValuesForSettingsFile:(NSString *)file;
++ (void)updateDefaultValue:(id)value forKey:(NSString *)key;
 @end
