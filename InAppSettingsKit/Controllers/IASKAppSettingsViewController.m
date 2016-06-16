@@ -617,10 +617,11 @@ CGRect IASKCGRectSwap(CGRect rect);
 	} else {
 		cell.textLabel.text = specifier.title;
 	}
-    
-	cell.imageView.image = specifier.cellImage;
-	cell.imageView.highlightedImage = specifier.highlightedCellImage;
-    
+
+	cell.imageView.image = [specifier.cellImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+	cell.imageView.highlightedImage = [specifier.highlightedCellImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    cell.imageView.tintColor = self.cellImageTintColor;
+
 	if (![specifier.type isEqualToString:kIASKPSMultiValueSpecifier] && ![specifier.type isEqualToString:kIASKPSTitleValueSpecifier] && ![specifier.type isEqualToString:kIASKPSTextFieldSpecifier]) {
 		cell.textLabel.textAlignment = specifier.textAlignment;
 	}
