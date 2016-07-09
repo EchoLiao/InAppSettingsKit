@@ -21,6 +21,11 @@
 #import "IASKViewController.h"
 #import "IASKSpecifier.h"
 
+#define IASKSpecifierValuesViewBackgroundColorKey        @"IASKSpecifierValuesViewBackgroundColorKey"
+#define IASKSpecifierValuesViewSeparatorColorKey         @"IASKSpecifierValuesViewSeparatorColorKey"
+#define IASKSpecifierValuesViewCellBackgroundColorKey    @"IASKSpecifierValuesViewCellBackgroundColorKey"
+#define IASKSpecifierValuesViewCellSelectedBackgroundViewKey        @"IASKSpecifierValuesViewCellSelectedBackgroundViewKey"
+#define IASKSpecifierValuesViewCellSelectedBackgroundViewColorKey   @"IASKSpecifierValuesViewCellSelectedBackgroundViewColorKey"
 #define IASKSpecifierValuesViewCellTextLabelFontKey      @"IASKSpecifierValuesViewCellTextLabelFontKey"
 #define IASKSpecifierValuesViewCellTextLabelTextColorKey @"IASKSpecifierValuesViewCellTextLabelTextColorKey"
 

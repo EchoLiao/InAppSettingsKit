@@ -76,6 +76,12 @@
 		// Make sure the currently checked item is visible
         [_tableView scrollToRowAtIndexPath:[self checkedItem] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
     }
+    if (self.customInfos[IASKSpecifierValuesViewBackgroundColorKey]) {
+        self.tableView.backgroundColor = self.customInfos[IASKSpecifierValuesViewBackgroundColorKey];
+    }
+    if (self.customInfos[IASKSpecifierValuesViewSeparatorColorKey]) {
+        self.tableView.separatorColor = self.customInfos[IASKSpecifierValuesViewSeparatorColorKey];
+    }
 	[super viewWillAppear:animated];
 }
 
@@ -153,6 +159,12 @@
 	
 	@try {
 		[[cell textLabel] setText:[self.settingsReader titleForStringId:[titles objectAtIndex:indexPath.row]]];
+        if (self.customInfos[IASKSpecifierValuesViewCellBackgroundColorKey])
+            cell.backgroundColor = self.customInfos[IASKSpecifierValuesViewCellBackgroundColorKey];
+        if (self.customInfos[IASKSpecifierValuesViewCellSelectedBackgroundViewKey])
+            cell.selectedBackgroundView = self.customInfos[IASKSpecifierValuesViewCellSelectedBackgroundViewKey];
+        if (self.customInfos[IASKSpecifierValuesViewCellSelectedBackgroundViewColorKey])
+            cell.selectedBackgroundView.backgroundColor = self.customInfos[IASKSpecifierValuesViewCellSelectedBackgroundViewColorKey];
         if (self.customInfos[IASKSpecifierValuesViewCellTextLabelFontKey])
             cell.textLabel.font = self.customInfos[IASKSpecifierValuesViewCellTextLabelFontKey];
         if (self.customInfos[IASKSpecifierValuesViewCellTextLabelTextColorKey])
