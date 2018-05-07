@@ -727,8 +727,12 @@ CGRect IASKCGRectSwap(CGRect rect);
         [[self navigationController] pushViewController:targetViewController animated:YES];
         
     } else if ([[specifier type] isEqualToString:kIASKOpenURLSpecifier]) {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:specifier.file]];
+        if ([self.delegate respondsToSelector:@selector(settingsViewController:urlButtonTappedForSpecifier:indexPath:)]) {
+            [self.delegate settingsViewController:self urlButtonTappedForSpecifier:specifier indexPath:indexPath];
+        } else {
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:specifier.file]];
+        }
     } else if ([[specifier type] isEqualToString:kIASKButtonSpecifier]) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         if ([self.delegate respondsToSelector:@selector(settingsViewController:buttonTappedForSpecifier:)]) {
@@ -759,11 +763,15 @@ CGRect IASKCGRectSwap(CGRect rect);
             mailViewController.navigationBar.barStyle = self.navigationController.navigationBar.barStyle;
             mailViewController.navigationBar.tintColor = self.navigationController.navigationBar.tintColor;
             mailViewController.navigationBar.titleTextAttributes =  self.navigationController.navigationBar.titleTextAttributes;
-            
-            if ([specifier localizedObjectForKey:kIASKMailComposeSubject]) {
+
+            if ([self.delegate respondsToSelector:@selector(settingsViewController:mailComposeSubjectForSpecifier:)]) {
+                [mailViewController setSubject:[self.delegate settingsViewController:self mailComposeSubjectForSpecifier:specifier]];
+            } else if ([specifier localizedObjectForKey:kIASKMailComposeSubject]) {
                 [mailViewController setSubject:[specifier localizedObjectForKey:kIASKMailComposeSubject]];
             }
-            if ([[specifier specifierDict] objectForKey:kIASKMailComposeToRecipents]) {
+            if ([self.delegate respondsToSelector:@selector(settingsViewController:mailComposeToRecipientsForSpecifier:)]) {
+                [mailViewController setToRecipients:[self.delegate settingsViewController:self mailComposeToRecipientsForSpecifier:specifier]];
+            } else if ([[specifier specifierDict] objectForKey:kIASKMailComposeToRecipents]) {
                 [mailViewController setToRecipients:[[specifier specifierDict] objectForKey:kIASKMailComposeToRecipents]];
             }
             if ([[specifier specifierDict] objectForKey:kIASKMailComposeCcRecipents]) {
