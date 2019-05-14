@@ -171,19 +171,26 @@
             cell.textLabel.textColor = self.customInfos[IASKSpecifierValuesViewCellTextLabelTextColorKey];
 	}
 	@catch (NSException * e) {}
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     if (indexPath == [self checkedItem]) {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
         return;
     }
+
+    NSArray *values = [_currentSpecifier multipleValues];
+
+    if ([self.settingsVC.delegate respondsToSelector:@selector(settingsViewController:specifier:canSelectAtIndexPath:andValue:)]) {
+        if (![self.settingsVC.delegate settingsViewController:self.settingsVC specifier:self.currentSpecifier canSelectAtIndexPath:indexPath andValue:values[indexPath.row]]) {
+            return;
+        }
+    }
     
-    NSArray *values         = [_currentSpecifier multipleValues];
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self deselectCell:[tableView cellForRowAtIndexPath:[self checkedItem]]];
     [self selectCell:[tableView cellForRowAtIndexPath:indexPath]];
     [self setCheckedItem:indexPath];

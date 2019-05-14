@@ -662,6 +662,7 @@ CGRect IASKCGRectSwap(CGRect rect);
         targetViewController.settingsReader = self.settingsReader;
         targetViewController.settingsStore = self.settingsStore;
         targetViewController.customInfos = self.specifierValuesViewCellCustomInfo;
+        targetViewController.settingsVC = self;
 		targetViewController.view.tintColor = self.view.tintColor;
         _currentChildViewController = targetViewController;
         [[self navigationController] pushViewController:targetViewController animated:YES];

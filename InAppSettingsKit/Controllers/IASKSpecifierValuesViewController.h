@@ -19,6 +19,7 @@
 #import "IASKViewController.h"
 @class IASKSpecifier;
 @class IASKSettingsReader;
+@class IASKAppSettingsViewController;
 
 @interface IASKSpecifierValuesViewController : UIViewController<IASKViewController,UITableViewDelegate,UITableViewDataSource> {
     UITableView				*_tableView;
@@ -33,5 +34,7 @@
 @property (nonatomic, retain) NSIndexPath *checkedItem;
 @property (nonatomic, retain) IASKSpecifier *currentSpecifier;
 @property (nonatomic, retain) NSDictionary *customInfos;
+
+@property (nonatomic, weak) IASKAppSettingsViewController *settingsVC;
 
 @end

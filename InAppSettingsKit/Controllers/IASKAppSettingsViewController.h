@@ -66,6 +66,8 @@
             didFinishWithResult:(MFMailComposeResult)result
                           error:(NSError*)error;
 
+- (BOOL)settingsViewController:(IASKAppSettingsViewController*)sender specifier:(IASKSpecifier*)specifier canSelectAtIndexPath:(NSIndexPath *)indexPath andValue:(NSNumber *)value;
+
 #pragma mark - respond to button taps
 - (void)settingsViewController:(IASKAppSettingsViewController*)sender buttonTappedForKey:(NSString*)key __attribute__((deprecated)); // use the method below with specifier instead
 - (void)settingsViewController:(IASKAppSettingsViewController*)sender buttonTappedForSpecifier:(IASKSpecifier*)specifier;
