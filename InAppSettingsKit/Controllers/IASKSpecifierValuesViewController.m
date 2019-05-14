@@ -146,6 +146,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell   = [tableView dequeueReusableCellWithIdentifier:kCellValue];
     NSArray *titles         = [_currentSpecifier multipleTitles];
+    NSArray *values         = [_currentSpecifier multipleValues];
 	
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellValue];
@@ -171,7 +172,14 @@
             cell.textLabel.textColor = self.customInfos[IASKSpecifierValuesViewCellTextLabelTextColorKey];
 	}
 	@catch (NSException * e) {}
-    
+
+    if ([self.settingsVC.delegate respondsToSelector:@selector(settingsViewController:specifier:cellTitleColorAtIndexPath:andValue:)]) {
+        UIColor *color = [self.settingsVC.delegate settingsViewController:self.settingsVC specifier:self.currentSpecifier cellTitleColorAtIndexPath:indexPath andValue:values[indexPath.row]];
+        if (color) {
+            cell.textLabel.textColor = color;
+        }
+    }
+
     return cell;
 }
 
