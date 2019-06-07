@@ -81,7 +81,7 @@ CGRect IASKCGRectSwap(CGRect rect);
 
 - (NSString*)file {
 	if (!_file) {
-		return @"Root";
+		return @"App_Settins_Root";
 	}
 	return _file;
 }
@@ -307,15 +307,6 @@ CGRect IASKCGRectSwap(CGRect rect);
     if([childViewController respondsToSelector:@selector(setHiddenKeys:animated:)]) {
         [(id)childViewController setHiddenKeys:theHiddenKeys animated:animated];
     }
-}
-
-+ (void)setupDefaultValues {
-    [self setupDefaultValuesForSettingsName:@"Settings"];
-}
-
-+ (void)setupDefaultValuesForSettingsName:(NSString *)name {
-    NSString *file = [NSString stringWithFormat:@"%@/%@.bundle/Root.plist", [[NSBundle mainBundle] bundlePath], name];
-    [self setupDefaultValuesForSettingsFile:file];
 }
 
 + (void)setupDefaultValuesForSettingsFile:(NSString *)file {
