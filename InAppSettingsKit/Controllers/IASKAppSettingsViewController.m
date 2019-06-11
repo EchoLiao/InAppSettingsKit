@@ -81,7 +81,7 @@ CGRect IASKCGRectSwap(CGRect rect);
 
 - (NSString*)file {
 	if (!_file) {
-		return @"App_Settins_Root";
+		return @"App_Settings_Root";
 	}
 	return _file;
 }
