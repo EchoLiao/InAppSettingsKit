@@ -352,27 +352,37 @@ CGRect IASKCGRectSwap(CGRect rect);
 - (void)toggledValue:(id)sender {
     IASKSwitch *toggle    = (IASKSwitch*)sender;
     IASKSpecifier *spec   = [_settingsReader specifierForKey:[toggle key]];
-    
-    if ([toggle isOn]) {
-        if ([spec trueValue] != nil) {
-            [self.settingsStore setObject:[spec trueValue] forKey:[toggle key]];
+
+    void (^commBlk)(void) = ^() {
+        if ([toggle isOn]) {
+            if ([spec trueValue] != nil) {
+                [self.settingsStore setObject:[spec trueValue] forKey:[toggle key]];
+            } else {
+                [self.settingsStore setBool:YES forKey:[toggle key]];
+            }
+        } else {
+            if ([spec falseValue] != nil) {
+                [self.settingsStore setObject:[spec falseValue] forKey:[toggle key]];
+            } else {
+                [self.settingsStore setBool:NO forKey:[toggle key]];
+            }
         }
-        else {
-            [self.settingsStore setBool:YES forKey:[toggle key]]; 
-        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kIASKAppSettingChanged object:[toggle key] userInfo:[NSDictionary dictionaryWithObject:[self.settingsStore objectForKey:[toggle key]] forKey:[toggle key]]];
+    };
+
+    if ([self.delegate respondsToSelector:@selector(settingsViewController:specifier:shouldToggleSwitch:complelteBlock:)]) {
+        [self.delegate settingsViewController:self specifier:spec shouldToggleSwitch:toggle.isOn complelteBlock:^(BOOL should) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (should) {
+                    commBlk();
+                } else {
+                    [toggle setOn:!toggle.isOn animated:YES];
+                }
+            });
+        }];
+    } else {
+        commBlk();
     }
-    else {
-        if ([spec falseValue] != nil) {
-            [self.settingsStore setObject:[spec falseValue] forKey:[toggle key]];
-        }
-        else {
-            [self.settingsStore setBool:NO forKey:[toggle key]]; 
-        }
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:kIASKAppSettingChanged
-                                                        object:[toggle key]
-                                                      userInfo:[NSDictionary dictionaryWithObject:[self.settingsStore objectForKey:[toggle key]]
-                                                                                           forKey:[toggle key]]];
 }
 
 - (void)sliderChangedValue:(id)sender {

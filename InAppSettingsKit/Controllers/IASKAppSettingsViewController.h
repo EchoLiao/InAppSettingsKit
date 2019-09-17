@@ -70,6 +70,8 @@
 
 - ( UIColor *)settingsViewController:(IASKAppSettingsViewController*)sender specifier:(IASKSpecifier*)specifier cellTitleColorAtIndexPath:(NSIndexPath *)indexPath andValue:(NSNumber *)value;
 
+- (void)settingsViewController:(IASKAppSettingsViewController*)sender specifier:(IASKSpecifier*)specifier shouldToggleSwitch:(BOOL)reqOn complelteBlock:(void (^)(BOOL should))shouldToggleBlk;
+
 #pragma mark - respond to button taps
 - (void)settingsViewController:(IASKAppSettingsViewController*)sender buttonTappedForKey:(NSString*)key __attribute__((deprecated)); // use the method below with specifier instead
 - (void)settingsViewController:(IASKAppSettingsViewController*)sender buttonTappedForSpecifier:(IASKSpecifier*)specifier;
