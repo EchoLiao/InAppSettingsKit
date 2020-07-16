@@ -650,6 +650,31 @@ CGRect IASKCGRectSwap(CGRect rect);
 	}
 }
 
+- (void)selectRowRefSpecifierKey:(NSString *)key interval:(double)interval {
+    NSIndexPath *idx = [self indexPathOfSpecifierKey:key];
+    if (idx) {
+        [self.tableView selectRowAtIndexPath:idx animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [NSTimer scheduledTimerWithTimeInterval:interval repeats:NO block:^(NSTimer * _Nonnull timer) {
+            [self tableView:self.tableView didSelectRowAtIndexPath:idx];
+        }];
+    }
+}
+
+- (NSIndexPath *)indexPathOfSpecifierKey:(NSString *)key {
+    NSInteger secs = [self.tableView numberOfSections];
+    for (NSInteger s = 0; s < secs; s++) {
+        NSInteger rows = [self.tableView numberOfRowsInSection:s];
+        for (NSInteger r = 0; r < rows; r++) {
+            NSIndexPath *idx = [NSIndexPath indexPathForRow:r inSection:s];
+            IASKSpecifier *specifier = [self.settingsReader specifierForIndexPath:idx];
+            if ([specifier.key isEqualToString:key]) {
+                return idx;
+            }
+        }
+    }
+    return nil;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     IASKSpecifier *specifier  = [self.settingsReader specifierForIndexPath:indexPath];
     
