@@ -66,9 +66,9 @@
             didFinishWithResult:(MFMailComposeResult)result
                           error:(NSError*)error;
 
-- (BOOL)settingsViewController:(IASKAppSettingsViewController*)sender specifier:(IASKSpecifier*)specifier canSelectAtIndexPath:(NSIndexPath *)indexPath andValue:(NSNumber *)value;
+- (BOOL)settingsViewController:(IASKAppSettingsViewController*)sender specifier:(IASKSpecifier*)specifier canSelectAtIndexPath:(NSIndexPath *)indexPath andValue:(id)value;
 
-- ( UIColor *)settingsViewController:(IASKAppSettingsViewController*)sender specifier:(IASKSpecifier*)specifier cellTitleColorAtIndexPath:(NSIndexPath *)indexPath andValue:(NSNumber *)value;
+- ( UIColor *)settingsViewController:(IASKAppSettingsViewController*)sender specifier:(IASKSpecifier*)specifier cellTitleColorAtIndexPath:(NSIndexPath *)indexPath andValue:(id)value;
 
 - (void)settingsViewController:(IASKAppSettingsViewController*)sender specifier:(IASKSpecifier*)specifier shouldToggleSwitch:(BOOL)reqOn complelteBlock:(void (^)(BOOL should))shouldToggleBlk;
 
