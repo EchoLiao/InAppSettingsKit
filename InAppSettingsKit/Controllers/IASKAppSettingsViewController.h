@@ -90,6 +90,8 @@
 @property (nonatomic, retain) NSSet *hiddenKeys;
 @property (nonatomic, retain) UIColor *cellImageTintColor;
 
+- (void)selectRowRefSpecifierKey:(NSString *)key interval:(double)interval;
+
 - (void)synchronizeSettings;
 - (void)dismiss:(id)sender;
 - (void)setHiddenKeys:(NSSet*)hiddenKeys animated:(BOOL)animated;
